@@ -52,17 +52,10 @@ if __name__ == "__main__":
         search_term = window.search_entry.get_text()
 
         results = zlist.search(search_term)
-        #new_zettel_view = ZettelView(results[0])
-        
-        #window.vbox.pack_start(new_zettel_view, True, True, 0)
 
-
-        
         for result in results:
             new_zettel_view = ZettelView(result)
             window.add_view_into_scrollable(new_zettel_view)
-            
-            #window.vbox.pack_start(new_zettel_view, True, True, 0)
             new_zettel_view.show()
         
 
