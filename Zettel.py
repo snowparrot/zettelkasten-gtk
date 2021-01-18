@@ -6,7 +6,12 @@ class Zettel:
         self.name = name
         self.tags = extract_tags(text)
         self.title = extract_title(text)
-        print(self.title)
+        self.links = extract_section(text, "Links")
+        ## TODO: Weitere Abschnitte einfügen
+        ## TODO: Vorlage entwerfen
+        
+        print(self.name)
+        print(self.links)
         super().__init__()
 
 
@@ -14,7 +19,6 @@ def extract_tags(text):
     pat = re.compile("#\w+[\s+\n]") # Checks for hashtags like #example
     tags = re.findall(pat, text)
     tags = [tag[:-1] for tag in tags]
-    print(tags)
 
     return tags
 
@@ -23,3 +27,22 @@ def extract_title(text):
     for line in lines:
         if line.startswith("# "):
             return line[2:]
+
+def extract_section(text, section, return_list = True):
+    lines = text.split("\n")
+    section_started = False
+    section_lines = list()
+    for line in lines:
+        if len(line) > 0:
+            if not section_started and line.startswith(f"## {section}"):
+                section_started = True
+            elif section_started and line.startswith(f"## "):
+                break
+            elif section_started:
+                section_lines.append(line)
+    if return_list:
+        return section_lines
+    else:
+        return "\n".join(section_lines)
+
+
