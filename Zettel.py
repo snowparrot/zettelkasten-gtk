@@ -6,6 +6,7 @@ class Zettel:
         self.name = name
         self.tags = extract_tags(text)
         self.title = extract_title(text)
+        print(self.title)
         super().__init__()
 
 
@@ -18,10 +19,7 @@ def extract_tags(text):
     return tags
 
 def extract_title(text):
-    print(len(text))
-    import pdb; pdb.set_trace() #todo Pattern lädt nicht richtig
-    pat = re.compile("^# .*$\n+") #looks for pattern "# this is a title \n"
-    title = re.findall(pat, text)
-    print(title)
-
-    return title
+    lines = text.split("\n")
+    for line in lines:
+        if line.startswith("# "):
+            return line[2:]
