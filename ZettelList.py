@@ -29,7 +29,7 @@ class ZettelList:
     def search(self, search_term):
         return [zettel
             for zettel in self.list
-            if search_term in zettel.text
+            if search_term in zettel.raw_text
         ]
 
     

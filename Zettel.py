@@ -2,13 +2,14 @@ import re
 
 class Zettel:
     def __init__(self, text = "", name = "") -> None:
-        self.text = text
+        self.raw_text = text
         self.name = name
         self.tags = extract_tags(text)
         self.title = extract_title(text)
         self.links = extract_section(text, "Links")
-        ## TODO: Weitere Abschnitte einfügen
-        ## TODO: Vorlage entwerfen
+        self.text = extract_section(text, "Text", return_list=False)
+        self.quelle = extract_section(text, "Quelle", return_list=False)
+
         
         print(self.name)
         print(self.links)
