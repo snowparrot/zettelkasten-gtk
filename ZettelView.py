@@ -24,13 +24,14 @@ class ZettelView(Gtk.Box): ## TODO: Schöner!
         ## creates text which is in order with self._letters_per_line
         intern_text = ""
         n_letters_line = 0
+
         for word in zettel.text.split(" "):
             if n_letters_line + len(word) < self._letters_per_line:
                 intern_text += word + " "
-                n_letters_line += len(word)
+                n_letters_line += len(word) + 1
             else:
-                intern_text += "\n" + word
-                n_letters = len(word)
+                intern_text += "\n" + word + " "
+                n_letters_line = len(word) + 1
 
         self.text_label.set_text(intern_text)
 
