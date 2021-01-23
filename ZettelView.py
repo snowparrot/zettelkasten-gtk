@@ -33,7 +33,12 @@ class ZettelView(Gtk.Box): ## TODO: Schöner!
                 intern_text += "\n" + word + " "
                 n_letters_line = len(word) + 1
 
-        self.text_label.set_text(intern_text)
+        self.text_label.set_text(
+            f"""{zettel.title} \t {zettel.name}
+            {" ".join(zettel.tags)}
+            {intern_text}
+            """
+            )
 
     def get_zettel(self):
         return self._zettel
