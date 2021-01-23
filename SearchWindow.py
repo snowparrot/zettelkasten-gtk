@@ -52,6 +52,10 @@ if __name__ == "__main__":
         search_term = window.search_entry.get_text()
 
         results = zlist.search(search_term)
+        search_label = Gtk.Label(label=f"Suche: {search_term}")
+        
+        window.add_view_into_scrollable(search_label)
+        search_label.show()
 
         for result in results:
             new_zettel_view = ZettelView(result)

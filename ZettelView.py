@@ -4,12 +4,12 @@ from Zettel import Zettel
 
 
 class ZettelView(Gtk.Box): ## TODO: Schöner!
+    ## TODO: GtkBox
     def __init__(self, zettel=Zettel(), letters_per_line = 80):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self._letters_per_line = letters_per_line
 
         self.text_label = Gtk.Label()
-        
 
         self.set_zettel(zettel)
 
