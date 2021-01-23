@@ -6,7 +6,7 @@ from ZettelView import ZettelView
 from Zettel import Zettel
 
 
-class SearchWindow(Gtk.Window):
+class SearchWindow(Gtk.Window): ##TODO:gtk Box
     def __init__(self) -> None:
         super().__init__(title="Suchfenster")
         self.set_size_request(1000, 1000)
