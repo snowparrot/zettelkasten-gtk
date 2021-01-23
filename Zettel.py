@@ -7,8 +7,10 @@ class Zettel:
         self.tags = extract_tags(text)
         self.title = extract_title(text)
         self.links = extract_section(text, "Links")
-        self.text = extract_section(text, "Text", return_list=False)
-        self.quelle = extract_section(text, "Quelle", return_list=False)
+        zettel_text = extract_section(text, "Text", return_list=False)
+        self.text = zettel_text.replace("\n", " ")
+
+        self.quelle = extract_section(text, "Quelle", return_list=False) ## Todo: Configuration erstellen...
 
         
         print(self.name)
