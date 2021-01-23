@@ -13,7 +13,8 @@ class SearchWindow(Gtk.Window): ##TODO:gtk Box
 
         self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.sw = Gtk.ScrolledWindow()
-        self.vbox_sw = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        self.search_grid = Gtk.Grid()
+        #self.vbox_sw = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
 
         search_box = Gtk.Box(spacing=6)
 
@@ -29,13 +30,22 @@ class SearchWindow(Gtk.Window): ##TODO:gtk Box
         self.vbox.pack_start(search_box, False, False, 0)
         self.vbox.pack_start(self.sw, True, True, 0)
 
-        self.sw.add_with_viewport(self.vbox_sw)
+        self.sw.add_with_viewport(self.search_grid)
+        self._first_element = True
 
 
         self.add(self.vbox)
 
     def add_view_into_scrollable(self, view):
-        self.vbox_sw.pack_start(view, True, True, 0)
+        if self._first_element:
+            self.search_grid.attach(view, 1, 0, 1, 1)
+            self._first_element = False
+            self._last_attached_widget = view
+        else:
+            self.search_grid.attach_next_to(view, self._last_attached_widget, 
+                Gtk.PositionType.BOTTOM, 1, 1)
+            self._last_attached_widget = view
+
 
 
 

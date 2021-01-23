@@ -3,19 +3,32 @@ from gi.repository import Granite
 from Zettel import Zettel
 
 
-class ZettelView(Gtk.Box): ## TODO: Schöner!
+class ZettelView(Gtk.Grid): ## TODO: Schöner!
     ## TODO: GtkBox
     def __init__(self, zettel=Zettel(), letters_per_line = 80):
-        super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        super().__init__()
         self._letters_per_line = letters_per_line
 
         self.text_label = Gtk.Label()
+        self.title_label = Gtk.Label()
+        self.tag_label = Gtk.Label()
+        self.name_label = Gtk.Label()
 
         self.set_zettel(zettel)
 
+        self.attach(self.title_label, 0, 0, 1, 1)
+        self.attach_next_to(self.name_label, self.title_label,
+                             Gtk.PositionType.RIGHT, 1, 1)
+        self.attach_next_to(self.tag_label, self.title_label,
+                        Gtk.PositionType.BOTTOM, 1, 1)
+        self.attach_next_to(self.text_label, self.tag_label,
+                        Gtk.PositionType.BOTTOM, 1, 1)  
 
-        super().pack_start(self.text_label, True, True, 0)
         self.text_label.show()
+        self.tag_label.show()
+        self.name_label.show()
+        self.title_label.show()
+
 
     def set_zettel(self, zettel):
 
@@ -33,12 +46,11 @@ class ZettelView(Gtk.Box): ## TODO: Schöner!
                 intern_text += "\n" + word + " "
                 n_letters_line = len(word) + 1
 
-        self.text_label.set_text(
-            f"""{zettel.title} \t {zettel.name}
-            {" ".join(zettel.tags)}
-            {intern_text}
-            """
-            )
+        self.title_label.set_text(zettel.title)
+        self.name_label.set_text(zettel.name)
+        self.tag_label.set_text(" ".join(zettel.tags))
+        self.text_label.set_text(intern_text)
+
 
     def get_zettel(self):
         return self._zettel

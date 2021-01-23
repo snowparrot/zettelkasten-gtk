@@ -12,9 +12,6 @@ class Zettel:
 
         self.quelle = extract_section(text, "Quelle", return_list=False) ## Todo: Configuration erstellen...
 
-        
-        print(self.name)
-        print(self.links)
         super().__init__()
 
 
