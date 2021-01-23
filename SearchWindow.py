@@ -9,7 +9,7 @@ from Zettel import Zettel
 class SearchWindow(Gtk.Window):
     def __init__(self) -> None:
         super().__init__(title="Suchfenster")
-        self.set_size_request(200, 500)
+        self.set_size_request(1000, 1000)
 
         self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.sw = Gtk.ScrolledWindow()
