@@ -14,7 +14,7 @@ class SearchWindow(Gtk.Window): ##TODO:gtk Box
         self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.sw = Gtk.ScrolledWindow()
         self.search_grid = Gtk.Grid()
-        #self.vbox_sw = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        self.vbox_sw = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
 
         search_box = Gtk.Box(spacing=6)
 
@@ -30,13 +30,16 @@ class SearchWindow(Gtk.Window): ##TODO:gtk Box
         self.vbox.pack_start(search_box, False, False, 0)
         self.vbox.pack_start(self.sw, True, True, 0)
 
-        self.sw.add_with_viewport(self.search_grid)
+        ##self.sw.add_with_viewport(self.search_grid)
+        self.sw.add_with_viewport(self.vbox_sw)
         self._first_element = True
 
 
         self.add(self.vbox)
 
     def add_view_into_scrollable(self, view):
+
+        """
         if self._first_element:
             self.search_grid.attach(view, 1, 0, 1, 1)
             self._first_element = False
@@ -45,6 +48,9 @@ class SearchWindow(Gtk.Window): ##TODO:gtk Box
             self.search_grid.attach_next_to(view, self._last_attached_widget, 
                 Gtk.PositionType.BOTTOM, 1, 1)
             self._last_attached_widget = view
+
+        """
+
 
 
 
@@ -69,6 +75,7 @@ if __name__ == "__main__":
 
         for result in results:
             new_zettel_view = ZettelView(result)
+            new_zettel_view.set_halign(Gtk.Align.CENTER)
             window.add_view_into_scrollable(new_zettel_view)
             new_zettel_view.show()
         
