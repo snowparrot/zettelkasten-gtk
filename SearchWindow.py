@@ -4,7 +4,6 @@ from gi.repository import Granite
 from ZettelList import ZettelList
 from ZettelView import ZettelView
 from Zettel import Zettel
-from SearchListView import SearchListView
 
 
 class SearchWindow(Gtk.Window):
@@ -38,6 +37,14 @@ class SearchWindow(Gtk.Window):
 
     def add_view_into_search_view(self, view):
         self.search_view.add_view(view)
+
+
+class SearchListView(Gtk.Box):
+    def __init__(self) -> None:
+        super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+
+    def add_view(self, view):
+        self.pack_start(view, True, True, 0)
 
 if __name__ == "__main__":
     zuri = "/home/snowparrot/NextCloud/Zettelkasten"
