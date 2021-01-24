@@ -4,6 +4,7 @@ from gi.repository import Granite
 from ZettelList import ZettelList
 from ZettelView import ZettelView
 from Zettel import Zettel
+from SearchListView import SearchListView
 
 
 class SearchWindow(Gtk.Window):
@@ -14,8 +15,8 @@ class SearchWindow(Gtk.Window):
 
         self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.sw = Gtk.ScrolledWindow()
-        self.search_grid = Gtk.Grid()
-        self.vbox_sw = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+
+        self.search_view = SearchListView()
 
         search_box = Gtk.Box(spacing=6)
 
@@ -31,14 +32,12 @@ class SearchWindow(Gtk.Window):
         self.vbox.pack_start(search_box, False, False, 0)
         self.vbox.pack_start(self.sw, True, True, 0)
 
-        self.sw.add_with_viewport(self.vbox_sw)
-        self._first_element = True
-
+        self.sw.add_with_viewport(self.search_view)
 
         self.add(self.vbox)
 
-    def add_view_into_scrollable(self, view):
-        self.vbox_sw.pack_start(view, True, True, 0)
+    def add_view_into_search_view(self, view):
+        self.search_view.add_view(view)
 
 if __name__ == "__main__":
     zuri = "/home/snowparrot/NextCloud/Zettelkasten"
@@ -56,13 +55,13 @@ if __name__ == "__main__":
 
         search_label = Gtk.Label(label=f"Suche: {search_term}")
         
-        window.add_view_into_scrollable(search_label)
+        window.add_view_into_search_view(search_label)
         search_label.show()
 
         for result in results:
             new_zettel_view = ZettelView(result)
             new_zettel_view.set_halign(Gtk.Align.CENTER)
-            window.add_view_into_scrollable(new_zettel_view)
+            window.add_view_into_search_view(new_zettel_view)
             new_zettel_view.show()
         
 

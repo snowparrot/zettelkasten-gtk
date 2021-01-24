@@ -4,9 +4,6 @@ from Zettel import Zettel
 
 
 class ZettelView(Gtk.Grid): ## TODO: Schöner!
-    ## https://developer.gnome.org/gtk3/stable/ch30s02.html
-
-    ## text nur in v expand, h fill
     def __init__(self, zettel=Zettel(), letters_per_line = 80):
         super().__init__()
         self._letters_per_line = letters_per_line
