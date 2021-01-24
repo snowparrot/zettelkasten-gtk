@@ -9,9 +9,10 @@ class ZettelView(Gtk.Grid): ## TODO: Schöner!
         self._letters_per_line = letters_per_line
 
         self.text_label = Gtk.Label()
-        self.text_label.set_hexpand(False)
-        self.text_label.set_vexpand(False)
-        
+        self.text_label.set_line_wrap(True)
+        self.text_label.set_justify(Gtk.Justification.FILL)
+        self.text_label.set_max_width_chars(letters_per_line)
+
         self.title_label = Gtk.Label()
         self.tag_label = Gtk.Label()
         self.name_label = Gtk.Label()
@@ -37,6 +38,8 @@ class ZettelView(Gtk.Grid): ## TODO: Schöner!
         self._zettel = zettel
 
         ## creates text which is in order with self._letters_per_line
+
+        """
         intern_text = ""
         n_letters_line = 0
 
@@ -48,10 +51,12 @@ class ZettelView(Gtk.Grid): ## TODO: Schöner!
                 intern_text += "\n" + word + " "
                 n_letters_line = len(word) + 1
 
+        """
+
         self.title_label.set_text(zettel.title)
         self.name_label.set_text(zettel.name)
         self.tag_label.set_text(" ".join(zettel.tags))
-        self.text_label.set_text(intern_text)
+        self.text_label.set_text(zettel.text)
 
 
     def get_zettel(self):
