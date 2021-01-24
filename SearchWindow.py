@@ -38,7 +38,7 @@ class SearchWindow(Gtk.Window):
         self.add(self.vbox)
 
     def add_view_into_scrollable(self, view):
-        self.vbox_sw.pack_start(view, False, False, 0)
+        self.vbox_sw.pack_start(view, True, True, 0)
 
 if __name__ == "__main__":
     zuri = "/home/snowparrot/NextCloud/Zettelkasten"
