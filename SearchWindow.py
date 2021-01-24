@@ -6,8 +6,9 @@ from ZettelView import ZettelView
 from Zettel import Zettel
 
 
-class SearchWindow(Gtk.Window): ##TODO:gtk Box
-    def __init__(self) -> None:
+class SearchWindow(Gtk.Window):
+    def __init__(self) -> None: 
+        ## Suchanzeige vom Fenster abstrahieren, clearen des Inhalts muss möglich sein
         super().__init__(title="Suchfenster")
         self.set_size_request(1000, 1000)
 
@@ -30,7 +31,6 @@ class SearchWindow(Gtk.Window): ##TODO:gtk Box
         self.vbox.pack_start(search_box, False, False, 0)
         self.vbox.pack_start(self.sw, True, True, 0)
 
-        ##self.sw.add_with_viewport(self.search_grid)
         self.sw.add_with_viewport(self.vbox_sw)
         self._first_element = True
 
@@ -38,22 +38,7 @@ class SearchWindow(Gtk.Window): ##TODO:gtk Box
         self.add(self.vbox)
 
     def add_view_into_scrollable(self, view):
-
-        """
-        if self._first_element:
-            self.search_grid.attach(view, 1, 0, 1, 1)
-            self._first_element = False
-            self._last_attached_widget = view
-        else:
-            self.search_grid.attach_next_to(view, self._last_attached_widget, 
-                Gtk.PositionType.BOTTOM, 1, 1)
-            self._last_attached_widget = view
-
-        """
-
-
-
-
+        self.vbox_sw.pack_start(view, False, False, 0)
 
 if __name__ == "__main__":
     zuri = "/home/snowparrot/NextCloud/Zettelkasten"
@@ -66,8 +51,9 @@ if __name__ == "__main__":
     window.connect("destroy", Gtk.main_quit)
     def on_search_button(button):
         search_term = window.search_entry.get_text()
-
         results = zlist.search(search_term)
+        
+
         search_label = Gtk.Label(label=f"Suche: {search_term}")
         
         window.add_view_into_scrollable(search_label)
