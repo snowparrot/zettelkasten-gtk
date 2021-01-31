@@ -1,3 +1,4 @@
+from os import terminal_size
 from Zettel import Zettel
 from gi.repository import Gtk
 from gi.repository import Granite
@@ -38,6 +39,16 @@ class SearchWindow(Gtk.Window):
     def add_view_into_search_view(self, view):
         self.search_view.add_view(view)
 
+ 
+
+    def clear_search_view(self):
+        self.sw.remove(self.sw.get_child())
+        self.search_view = SearchListView()
+        self.sw.add_with_viewport(self.search_view)
+        self.show_all()
+
+        
+
 
 class SearchListView(Gtk.Box):
     def __init__(self) -> None:
@@ -49,13 +60,20 @@ class SearchListView(Gtk.Box):
 if __name__ == "__main__":
     zuri = "/home/snowparrot/NextCloud/Zettelkasten"
     zlist = ZettelList(zuri)
+    first_time = True
 
-
-    ## gtk
+    ## gtw
     window = SearchWindow()
     window.show_all()
     window.connect("destroy", Gtk.main_quit)
     def on_search_button(button):
+        ## Todo: Suchtreffer markieren
+        ## Todo: Anzahl Suchtreffer anzeigen (Bei 0 schönen Satz)
+        ## Todo: Ordnung der Ergebnisse verbessern
+        global first_time 
+        if not first_time:
+            window.clear_search_view()
+
         search_term = window.search_entry.get_text()
         results = zlist.search(search_term)
         
@@ -70,6 +88,9 @@ if __name__ == "__main__":
             new_zettel_view.set_halign(Gtk.Align.CENTER)
             window.add_view_into_search_view(new_zettel_view)
             new_zettel_view.show()
+
+        first_time = False
+        
         
 
     window.search_button.connect("clicked", on_search_button)

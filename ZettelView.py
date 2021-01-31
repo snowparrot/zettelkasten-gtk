@@ -3,14 +3,14 @@ from gi.repository import Granite
 from Zettel import Zettel
 
 
-class ZettelView(Gtk.Grid): ## TODO: Schöner!
+class ZettelView(Gtk.Grid):
     def __init__(self, zettel=Zettel(), letters_per_line = 80):
         super().__init__()
         self._letters_per_line = letters_per_line
 
-        self.text_label = Gtk.Label()
+        self.text_label = Gtk.Label() ## TODO: Eigenschaften auf andere Labels ausbreiten?, markierbar machen
         self.text_label.set_line_wrap(True)
-        self.text_label.set_justify(Gtk.Justification.FILL)
+        self.text_label.set_justify(Gtk.Justification.FILL) 
         self.text_label.set_max_width_chars(letters_per_line)
 
         self.title_label = Granite.HeaderLabel()
