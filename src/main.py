@@ -8,16 +8,14 @@ gi.require_version('Granite', '1.0')
 from gi.repository import Gtk, Gio, Gdk, Granite, GObject
 from SearchWindow import SearchWindow
 from ZettelList import ZettelList
-from Zettel import Zettel
 from ZettelView import ZettelView
 
 
 
 zuri = "/home/snowparrot/NextCloud/Zettelkasten"
 zlist = ZettelList(zuri)
-first_time = True
 
-window = SearchWindow()
+window = SearchWindow() ## auf MainWindow ändern
 window.show_all()
 window.connect("destroy", Gtk.main_quit)
 def on_search_button(button):
@@ -41,8 +39,6 @@ def on_search_button(button):
         new_zettel_view.set_halign(Gtk.Align.CENTER)
         window.add_view_into_search_view(new_zettel_view)
         new_zettel_view.show()
-
-    first_time = False
     
     
 

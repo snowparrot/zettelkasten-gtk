@@ -2,13 +2,12 @@ from gi.repository import Gtk
 from gi.repository import Granite
 
 
-class SearchWindow(Gtk.Window):
+class SearchContainer(Gtk.Box):
     def __init__(self) -> None: 
-        ## Suchanzeige vom Fenster abstrahieren
-        super().__init__(title="Suchfenster")
-        self.set_default_size(500, 500)
+        super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=6)
 
-        self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+
+        #self.vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.sw = Gtk.ScrolledWindow()
 
         self.search_view = SearchListView()
@@ -24,12 +23,12 @@ class SearchWindow(Gtk.Window):
         search_box.pack_start(self.search_entry, True, True, 0)
         search_box.pack_start(self.search_button, False, False, 0)
 
-        self.vbox.pack_start(search_box, False, False, 0)
-        self.vbox.pack_start(self.sw, True, True, 0)
+        self.pack_start(search_box, False, False, 0)
+        self.pack_start(self.sw, True, True, 0)
 
         self.sw.add_with_viewport(self.search_view)
 
-        self.add(self.vbox)
+        
 
     def add_view_into_search_view(self, view):
         self.search_view.add_view(view)
@@ -41,6 +40,7 @@ class SearchWindow(Gtk.Window):
         self.search_view = SearchListView()
         self.sw.add_with_viewport(self.search_view)
         self.show_all()
+
 
         
 

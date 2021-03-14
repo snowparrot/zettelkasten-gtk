@@ -8,7 +8,7 @@ class ZettelView(Gtk.Grid):
         super().__init__()
         self._letters_per_line = letters_per_line
 
-        self.text_label = Gtk.Label() ## TODO: Eigenschaften auf andere Labels ausbreiten?, markierbar machen
+        self.text_label = Gtk.Label() ## TODO: Eigenschaften auf andere Labels ausbreiten?
         self.text_label.set_line_wrap(True)
         self.text_label.set_justify(Gtk.Justification.FILL) 
         self.text_label.set_max_width_chars(letters_per_line)
@@ -16,6 +16,11 @@ class ZettelView(Gtk.Grid):
         self.title_label = Granite.HeaderLabel()
         self.tag_label = Gtk.Label()
         self.name_label = Gtk.Label()
+
+        self.text_label.set_selectable(True)
+        self.title_label.set_selectable(True)
+        self.tag_label.set_selectable(True)
+        self.name_label.set_selectable(True)
 
         self.set_zettel(zettel)
 
