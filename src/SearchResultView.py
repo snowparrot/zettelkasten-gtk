@@ -3,7 +3,7 @@ from gi.repository import Granite
 from Zettel import Zettel
 
 
-class ZettelView(Gtk.Grid):
+class SearchResultView(Gtk.Grid):
     def __init__(self, zettel=Zettel(), letters_per_line = 80):
         super().__init__()
         self._letters_per_line = letters_per_line

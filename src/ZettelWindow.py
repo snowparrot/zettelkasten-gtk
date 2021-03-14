@@ -1,7 +1,8 @@
 from gi.repository import Gtk
 from gi.repository import Gio
-from gi.repository import Granite
-from gi.repository import GtkSource
+
+
+from ZettelDataService import ZettelDataService
 
 
 
@@ -39,18 +40,21 @@ class ZettelWindow(Gtk.Window):
 
         self.add(self.text_view)
 
-def on_save_button(button):
+
 
 
 if __name__ == "__main__":
+
+    zuri = "/home/snowparrot/Dokumente/gtk-Zettelkasten/testdata/"
+    zlist = ZettelDataService(zuri)
 
     win = ZettelWindow()
     win.connect("destroy", Gtk.main_quit)
 
     def on_save_button(button):
-        pass
+        zlist.add_zettel_on_uri(win.text_view.get_buffer().props.text)
 
-    win.connect("clicked", on_save_button)
+    win.header_bar_button.connect("clicked", on_save_button)
     win.show_all()
 
     Gtk.main()

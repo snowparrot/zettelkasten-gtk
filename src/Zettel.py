@@ -1,4 +1,7 @@
 import re
+from datetime import datetime
+
+
 
 class Zettel:
     def __init__(self, text = "", file_name = "") -> None:
@@ -12,7 +15,7 @@ class Zettel:
 
         self.quelle = extract_section(text, "Quelle", return_list=False) ## Todo: Configuration erstellen...
 
-        super().__init__()
+    
 
 
 def extract_tags(text):
@@ -44,5 +47,6 @@ def extract_section(text, section, return_list = True):
         return section_lines
     else:
         return "\n".join(section_lines)
+
 
 
