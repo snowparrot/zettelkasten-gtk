@@ -1,9 +1,9 @@
 import re
 
 class Zettel:
-    def __init__(self, text = "", name = "") -> None:
+    def __init__(self, text = "", file_name = "") -> None:
         self.raw_text = text
-        self.name = name
+        self.file_name = file_name
         self.tags = extract_tags(text)
         self.title = extract_title(text)
         self.links = extract_section(text, "Links")

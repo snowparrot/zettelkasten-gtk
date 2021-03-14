@@ -43,7 +43,7 @@ class ZettelView(Gtk.Grid):
         self._zettel = zettel
 
         self.title_label.set_text(zettel.title)
-        self.name_label.set_text(zettel.name)
+        self.name_label.set_text(zettel.file_name)
 
         tag_text = __style_tags__(" ".join(zettel.tags)) ##Unschön: Vermischung von Code und Stil
         self.tag_label.set_markup(tag_text)

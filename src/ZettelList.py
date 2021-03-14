@@ -16,7 +16,7 @@ class ZettelList:
                 text = f.read()
                 text_list.append({
                     "text": text,
-                    "name": file_name
+                    "file_name": file_name
                 })
 
         self.list = [ Zettel(**element)
