@@ -8,7 +8,7 @@ class SearchResultView(Gtk.Grid):
         super().__init__()
         self._letters_per_line = letters_per_line
 
-        self.text_label = Gtk.Label() ## TODO: Eigenschaften auf andere Labels ausbreiten?
+        self.text_label = Gtk.Label()
         self.text_label.set_line_wrap(True)
         self.text_label.set_justify(Gtk.Justification.FILL) 
         self.text_label.set_max_width_chars(letters_per_line)

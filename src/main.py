@@ -9,39 +9,43 @@ from gi.repository import Gtk, Gio, Gdk, Granite, GObject
 from SearchWindow import SearchWindow
 from ZettelDataService import ZettelDataService
 from SearchResultView import SearchResultView
+from MainWindow import MainWindow
 
 
 
 zuri = "/home/snowparrot/NextCloud/Zettelkasten"
-zlist = ZettelDataService(zuri)
+zData = ZettelDataService(zuri)
 
-window = SearchWindow() ## auf MainWindow ändern
+window = MainWindow() ## auf MainWindow ändern
 window.show_all()
 window.connect("destroy", Gtk.main_quit)
 def on_search_button(button):
     ## Todo: Suchtreffer markieren
-    ## Todo: Anzahl Suchtreffer anzeigen (Bei 0 schönen Satz)
     ## Todo: Ordnung der Ergebnisse verbessern
 
-    window.clear_search_view()
+    window.sc.clear_search_view()
 
-    search_term = window.search_entry.get_text()
-    results = zlist.search(search_term)
+    search_term = window.sc.search_entry.get_text()
+    results = zData.search(search_term)
     
-
-    search_label = Gtk.Label(label=f"Suche: {search_term}")
+    if len(results) == 0:
+        search_label = \
+            Gtk.Label(label=f"{search_term} hat keine Suchtreffer ergeben")
+    else: 
+        search_label = \
+            Gtk.Label(label=f"Suche: {search_term} ergab {len(results)} Suchergebnisse")
     
-    window.add_view_into_search_view(search_label)
+    window.sc.add_view_into_search_view(search_label)
     search_label.show()
 
     for result in results:
         new_zettel_view = SearchResultView(result)
         new_zettel_view.set_halign(Gtk.Align.CENTER)
-        window.add_view_into_search_view(new_zettel_view)
+        window.sc.add_view_into_search_view(new_zettel_view)
         new_zettel_view.show()
     
     
 
-window.search_button.connect("clicked", on_search_button)
+window.sc.search_button.connect("clicked", on_search_button)
 
 Gtk.main()

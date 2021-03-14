@@ -18,7 +18,6 @@ class ZettelWindow(Gtk.Window):
         self.header_bar.props.title = title
         self.set_titlebar(self.header_bar)
 
-        icon = Gio.ThemedIcon(name="mail-send-receive-symbolic")
 
 
         self.header_bar.pack_start(self.header_bar_button)
