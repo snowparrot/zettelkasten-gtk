@@ -10,6 +10,7 @@ from SearchWindow import SearchWindow
 from ZettelDataService import ZettelDataService
 from SearchResultView import SearchResultView
 from MainWindow import MainWindow
+from ZettelWindow import ZettelWindow
 
 
 
@@ -43,9 +44,15 @@ def on_search_button(button):
         new_zettel_view.set_halign(Gtk.Align.CENTER)
         window.sc.add_view_into_search_view(new_zettel_view)
         new_zettel_view.show()
-    
+
+
+def on_create_button(button):
+    create_window = ZettelWindow()
+    create_window.show_all()
+    #create_window.connect("destroy", Gtk.close)
     
 
 window.sc.search_button.connect("clicked", on_search_button)
+window.header_bar_button.connect("clicked", on_create_button)
 
 Gtk.main()
